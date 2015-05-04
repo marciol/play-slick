@@ -13,8 +13,8 @@ trait CompaniesComponent { self: HasDatabaseConfig[JdbcProfile] =>
   import driver.api._
 
   class Companies(tag: Tag) extends Table[Company](tag, "COMPANY") {
-    def id = column[Long]("ID", O.PrimaryKey, O.AutoInc)
-    def name = column[String]("NAME")
+    def id = column[Long]("id", O.PrimaryKey, O.AutoInc)
+    def name = column[String]("name")
     def * = (id.?, name) <> (Company.tupled, Company.unapply _)
   }
 }

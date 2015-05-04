@@ -1,5 +1,6 @@
 package controllers
 
+import akka.event.slf4j.Logger
 import models.Computer
 import play.api.Play
 import play.api.data.Form
@@ -18,6 +19,8 @@ import Play.current
 import play.api.i18n.Messages.Implicits._
 import dao.CompaniesDAO
 import dao.ComputersDAO
+import views._
+import play.twirl.api.{Html, HtmlFormat}
 
 /** Manage a database of computers. */
 object Application extends Controller {
@@ -49,7 +52,8 @@ object Application extends Controller {
     */
   def list(page: Int, orderBy: Int, filter: String) = Action.async { implicit request =>
     val computers = computersDao.list(page = page, orderBy = orderBy, filter = ("%" + filter + "%"))
-    computers.map(cs => Ok(html.list(cs, orderBy, filter)))
+    //computers.map(cs => Ok(html.list(cs, orderBy, filter)))
+    computers.map(cs => Ok(Html(view.list(cs, orderBy, filter).toString)))
   }
 
   /** Display the 'edit form' of a existing Computer.

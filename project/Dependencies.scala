@@ -1,5 +1,6 @@
 import sbt._
 import sbt.Keys._
+import play.Play.autoImport._
 
 object Dependencies {
   val playSlick = Seq(
@@ -10,7 +11,10 @@ object Dependencies {
     Library.reflections.notTransitive,
     Library.playSpecs2 % "test",
     Library.hsqldb % "test",
-    Library.mockito % "test"
+    Library.mockito % "test",
+    Library.postgres,
+    Library.scalatags,
+    filters
   )
 
   val resolvers = DefaultOptions.resolvers(snapshot = true) ++ Seq(
@@ -28,15 +32,19 @@ object Version {
   val mockito      = "1.9.5"
   val reflections  = "0.9.9"
   val slick        = "3.0.0"
+  val postgres     = "9.3-1103-jdbc4"
+  val scalatags    = "0.5.1"
 }
 
 object Library {
-  val findbugs     = "com.google.code.findbugs" %  "jsr305"            % Version.findbugs
-  val hsqldb       = "org.hsqldb"               %  "hsqldb"            % Version.hsqldb
-  val javaxServlet = "javax.servlet"            %  "javax.servlet-api" % Version.javaxServlet
-  val mockito      = "org.mockito"              %  "mockito-all"       % Version.mockito
-  val playJdbc     = "com.typesafe.play"        %% "play-jdbc"         % Version.play
-  val playSpecs2   = "com.typesafe.play"        %% "play-specs2"       % Version.play
-  val reflections  = "org.reflections"          %  "reflections"       % Version.reflections
-  val slick        = "com.typesafe.slick"       %% "slick"             % Version.slick
+  val findbugs     = "com.google.code.findbugs"  %  "jsr305"             % Version.findbugs
+  val hsqldb       = "org.hsqldb"                %  "hsqldb"             % Version.hsqldb
+  val javaxServlet = "javax.servlet"             %  "javax.servlet-api"  % Version.javaxServlet
+  val mockito      = "org.mockito"               %  "mockito-all"        % Version.mockito
+  val playJdbc     = "com.typesafe.play"         %% "play-jdbc"          % Version.play
+  val playSpecs2   = "com.typesafe.play"         %% "play-specs2"        % Version.play
+  val reflections  = "org.reflections"           %  "reflections"        % Version.reflections
+  val slick        = "com.typesafe.slick"        %% "slick"              % Version.slick
+  val postgres     = "org.postgresql"            %  "postgresql"         % Version.postgres
+  val scalatags    = "com.lihaoyi"               %% "scalatags"          % Version.scalatags
 }

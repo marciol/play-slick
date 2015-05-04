@@ -1,5 +1,8 @@
 import java.text.SimpleDateFormat
 
+import filters.LoggingFilter
+import play.api.http.HttpFilters
+
 import scala.concurrent.Await
 import scala.concurrent.duration.Duration
 
@@ -9,6 +12,11 @@ import models.Company
 import models.Computer
 import play.api.Application
 import play.api.GlobalSettings
+import javax.inject.Inject
+
+class Filters @Inject() (log: LoggingFilter) extends HttpFilters {
+  val filters = Seq(log)
+}
 
 object Global extends GlobalSettings {
   override def onStart(app: Application) {

@@ -20,11 +20,11 @@ class ComputersDAO extends CompaniesComponent with HasDatabaseConfig[JdbcProfile
 
     implicit val dateColumnType = MappedColumnType.base[Date, Long](d => d.getTime, d => new Date(d))
 
-    def id = column[Long]("ID", O.PrimaryKey, O.AutoInc)
-    def name = column[String]("NAME")
-    def introduced = column[Option[Date]]("INTRODUCED")
-    def discontinued = column[Option[Date]]("DISCONTINUED")
-    def companyId = column[Option[Long]]("COMPANY_ID")
+    def id = column[Long]("id", O.PrimaryKey, O.AutoInc)
+    def name = column[String]("name")
+    def introduced = column[Option[Date]]("introduced")
+    def discontinued = column[Option[Date]]("discontinued")
+    def companyId = column[Option[Long]]("company_id")
 
     def * = (id.?, name, introduced, discontinued, companyId) <> (Computer.tupled, Computer.unapply _)
   }
